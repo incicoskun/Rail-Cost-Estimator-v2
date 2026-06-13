@@ -7,8 +7,8 @@ A lightweight, machine learning-based Decision Support System designed to predic
 ## Core Logic & Purpose
 
 * **The Problem:** Early-stage rail budgeting suffers from a lack of architectural detail, often leading to massive cost overruns.
-* **The Solution:** This system utilizes a **Quantile Gradient Boosting Regressor** to generate objective, data-driven median cost estimates based strictly on primary physical inputs (length, stations, tunnel %, and transit mode).
-* **Handling Data Imbalance:** To prevent model distortion in countries with very few historical projects, it implements **Bayesian Smoothed Target Encoding**. This automatically shrinks sparse regional data toward global empirical baselines.
+* **The Solution:** This system utilizes a Quantile Gradient Boosting Regressor to generate objective, data-driven median cost estimates based on primary physical inputs (length, stations, tunnel %, and transit mode).
+* **Handling Data Imbalance:** To prevent model distortion in countries with very few historical projects, it implements Bayesian Smoothed Target Encoding. This automatically shrinks sparse regional data toward global empirical baselines.
 * **Budget Boundaries & Breakdown:** Instead of a single static number, the system calibrates Out-of-Fold (OOF) error distributions to output reliable $Q_{10} - Q_{90}$ probability bounds.
 * **Subsystem Disaggregation:** Leverages historical normalized median cost structures from the Federal Transit Administration (FTA) to safely break down total cost projections into 8 core engineering asset classes based on the selected transit mode.
 * **Explainable AI (SHAP):** Integrates game-theoretic Shapley Additive exPlanations to visually dismantle the black-box nature of the model, quantifying the exact dollar impact of features like station density or tunnel percentage for executive transparency.
@@ -45,9 +45,9 @@ python train.py
 ## Performance Benchmarks
 
 * **MdAPE (Median Absolute Percentage Error):** 19.4% 
-* **Logarithmic $R^2$ (Explained Variance):** 0.532 (Explaining over 53% of highly volatile global railway variance using strictly primary physical attributes).
-* **Mean Bias Error:** -0.1% (Near-zero systemic over/under-estimation, proving complete aridity from optimism bias).
-* **Success Rate ($\pm30\%$ Boundary):** 67.8% of cross-validated inferences land precisely within acceptable infrastructure contingency limits.
+* **Logarithmic $R^2$:** 0.532
+* **Mean Bias Error:** -0.1% 
+* **Success Rate ($\pm30\%$ Boundary):** 67.8% 
 
 ---
 
