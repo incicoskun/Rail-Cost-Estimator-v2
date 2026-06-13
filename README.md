@@ -68,6 +68,6 @@ Data-Adaptive-Rail-Cost-Estimator/
 ├── .gitignore           # Version control exclusion rules
 ├── app.py               # Main Streamlit web application entry-point
 ├── train.py             # Global execution script for pipeline retraining
-├── requirements.txt     # Optimized production dependencies
+├── requirements.txt     # Production dependencies
 └── *.pkl                # Serialized model weights, feature names, and memory packages
 ```
