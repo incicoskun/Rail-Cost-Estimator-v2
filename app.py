@@ -1,4 +1,4 @@
-"""Rail Cost Estimator - Streamlit Application (Modular Version)."""
+"""Rail Cost Estimator - Streamlit Application"""
 
 import joblib
 import numpy as np
@@ -112,16 +112,6 @@ model, memory, load_error = load_model_artifacts()
 with st.sidebar:
     st.markdown("### Project Configuration")
 
-    # # Show cache/load status
-    # if "model_load_time" in st.session_state:
-    #     model_time = st.session_state.get("model_load_time", 0)
-    #     fta_time = st.session_state.get("fta_load_time", 0)
-    #     st.caption(f"📦 Model loaded in {model_time:.3f}s")
-    #     if fta_time > 0:
-    #         st.caption(f"📊 FTA lookup loaded in {fta_time:.3f}s")
-
-    # st.divider()
-
     clist = sorted(ui_cfg.city_map.keys()) + ["Other"]
     country_choice = st.selectbox(
         "Country", clist,
@@ -194,15 +184,6 @@ with st.sidebar:
     )
 
     st.divider()
-
-    # actual_cost = st.number_input(
-    #     "Actual cost/km (M$)",
-    #     ui_cfg.defaults["actual_cost"]["min"],
-    #     ui_cfg.defaults["actual_cost"]["max"],
-    #     ui_cfg.defaults["actual_cost"]["default"],
-    #     ui_cfg.defaults["actual_cost"]["step"]
-    # )
-
     run = st.button("Generate Prediction →")
 
 
@@ -231,7 +212,6 @@ if run and end_year >= start_year:
         "is_regional": is_regional,
         "transit_mode": transit_mode,
     })
-    # result["actual"] = actual_cost
     st.session_state["result"] = result
 
 r = st.session_state.get("result")
@@ -362,36 +342,6 @@ with col_table:
         hide_index=True
     )
 
-# 3. Benchmark Verification
-# if r["actual"] > 0:
-#     err_pct = (pred - r["actual"]) / r["actual"] * 100
-#     ec = colors["success"] if abs(err_pct) <= 30 else colors["error"]
-#     model_share = min(100.0, (pred / max(pred, r["actual"])) * 100.0)
-#     actual_share = min(100.0, (r["actual"] / max(pred, r["actual"])) * 100.0)
-
-#     st.markdown(f"""
-#     <div style="background:{colors['card']}; border:1px solid {colors['border']};
-#                 border-radius:12px; padding:20px; margin:1.5rem 0;">
-#       <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-#         <span style="font-size:14px; font-weight:600;">Benchmark Verification</span>
-#         <span style="color:{ec}; font-weight:700;">Error: {err_pct:+.1f}%</span>
-#       </div>
-#       <div style="margin-bottom:15px;">
-#         <div style="display:flex; justify-content:space-between; font-size:12px;
-#                     color:{colors['text_muted']}; margin-bottom:4px;">
-#           <span>Model Prediction</span><b>${pred:,.0f}M</b>
-#         </div>
-#         {card_bar_ratio(model_share)}
-#       </div>
-#       <div>
-#         <div style="display:flex; justify-content:space-between; font-size:12px;
-#                     color:{colors['text_muted']}; margin-bottom:4px;">
-#           <span>Realized Project Cost</span><b>${r['actual']:,.0f}M</b>
-#         </div>
-#         {card_bar_ratio(actual_share)}
-#       </div>
-#     </div>
-#     """, unsafe_allow_html=True)
 
 # 4. Context & Summary
 left, right = st.columns([3, 2])
